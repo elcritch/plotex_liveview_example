@@ -1,11 +1,6 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
 use Mix.Config
+
+config :ex_cldr, default_locale: "en", json_library: Jason, default_backend: PlotexLiveViewExample.Cldr
 
 config :plotex_liveview_example,
   namespace: PlotexLiveViewExample

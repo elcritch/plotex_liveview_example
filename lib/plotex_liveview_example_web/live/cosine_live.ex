@@ -1,8 +1,8 @@
-defmodule PlotexLiveViewExample.DataHistoryLive do
+defmodule PlotexLiveViewExample.CosineGraphLive do
   use Phoenix.LiveView
-  # import Calendar.Strftime
   require Logger
   alias Plotex.Axis
+  alias Plotex.ViewRange
   alias Plotex.Output.Options
   alias Plotex.Output.Options
   alias Plotex.Output.Formatter
@@ -24,11 +24,12 @@ defmodule PlotexLiveViewExample.DataHistoryLive do
   def render(assigns) do
     ~L"""
       <article>
-        <h3>TRO (ppm)</h3>
-        <%= graph_for_data(@tro_ppm) %>
+        <h3>Graphs</h3>
+        <%= graph_for_data(@plt) %>
       </article>
 
       <style>
+        <%= Plotex.Output.Svg.default_css() %>
       </style>
     """
   end
@@ -39,14 +40,17 @@ defmodule PlotexLiveViewExample.DataHistoryLive do
 
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
 
-    edt = NaiveDateTime.utc_now()
-    sdt = edt |> NaiveDateTime.add(-3600, :second)
+    edt = DateTime.utc_now()
+    sdt = edt |> DateTime.add(-3600, :second)
 
     socket! =
       socket
       |> put_date()
       |> assign(start: sdt)
       |> assign(stop: edt)
+      |> assign(xdata: [])
+      |> assign(ydata: [])
+      |> update_plot()
 
     {:ok, socket!}
   end
@@ -56,29 +60,41 @@ defmodule PlotexLiveViewExample.DataHistoryLive do
     socket! =
       socket
       |> put_date()
-      |> put_graph_data()
+      |> update_plot()
 
     {:noreply, socket!}
   end
 
   defp put_date(socket) do
-    assign(socket, date: NaiveDateTime.utc_now())
+    assign(socket, date: DateTime.utc_now())
   end
 
-  defp put_graph_data(socket) do
+  defp update_plot(socket) do
     # Logger.warn("#{__MODULE__} graph data: #{ inspect socket.assigns } ")
     xdata = socket.assigns.xdata
     ydata = socket.assigns.ydata
 
-    dt = NaiveDateTime.utc_now()
-    y = Math.sin( WebApp.Data.to_unix(dt)/10.0 )
+    dt = DateTime.utc_now()
+    y = :math.sin( DateTime.to_unix(dt, :second) / 10.0 )
 
     xdata! = Enum.take([dt | xdata], 1000)
     ydata! = Enum.take([y | ydata], 1000)
 
+    plt = Plotex.plot(
+      [{xdata!, ydata!}],
+      xaxis: [units: %Axis.Units.Time{},
+              formatter: %Formatter.DateTime.Cldr{},
+              ticks: 4,
+              width: 140,
+              padding: 0.05,
+              view_min: %ViewRange{start: dt, stop: dt |> DateTime.add(120, :second)},
+      ]
+    )
+
     assign(socket,
       xdata: xdata!,
-      ydata: ydata!
+      ydata: ydata!,
+      plt: plt,
     )
   end
 
