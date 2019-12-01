@@ -87,7 +87,7 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
               ticks: 4,
               width: 140,
               padding: 0.05,
-              view_min: %ViewRange{start: dt, stop: dt |> DateTime.add(120, :second)},
+              view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
       ]
     )
 
