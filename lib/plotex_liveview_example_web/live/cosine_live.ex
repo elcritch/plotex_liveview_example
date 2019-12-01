@@ -40,7 +40,7 @@ defmodule PlotexLiveViewExample.DataHistoryLive do
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
 
     edt = NaiveDateTime.utc_now()
-    sdt = sdt |> NaiveDateTime.add(-3600, :second)
+    sdt = edt |> NaiveDateTime.add(-3600, :second)
 
     socket! =
       socket
@@ -70,9 +70,8 @@ defmodule PlotexLiveViewExample.DataHistoryLive do
     xdata = socket.assigns.xdata
     ydata = socket.assigns.ydata
 
-    udt = DateTime.utc_now()
-    y = Math.sin( WebApp.Data.to_unix(udt)/10.0 )
-    dt = udt |> dt_to_localtime()
+    dt = NaiveDateTime.utc_now()
+    y = Math.sin( WebApp.Data.to_unix(dt)/10.0 )
 
     xdata! = Enum.take([dt | xdata], 1000)
     ydata! = Enum.take([y | ydata], 1000)
