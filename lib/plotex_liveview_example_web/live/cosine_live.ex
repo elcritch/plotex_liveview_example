@@ -1,4 +1,4 @@
-defmodule WebAppWeb.DataHistoryLive do
+defmodule PlotexLiveViewExample.DataHistoryLive do
   use Phoenix.LiveView
   # import Calendar.Strftime
   require Logger
