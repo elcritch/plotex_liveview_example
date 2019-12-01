@@ -36,6 +36,8 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
         </form>
       </article>
       <style>
+        input { width: 50%; }
+
         <%= Plotex.Output.Svg.default_css() %>
       </style>
     """

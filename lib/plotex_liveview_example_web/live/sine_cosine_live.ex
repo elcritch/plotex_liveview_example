@@ -28,14 +28,16 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
         <%= graph_for_data(@plt) %>
       </article>
       <article>
-        <form phx-change="update">
+        <form phx-change="update" >
           <label>Tick MS: <%= @speed %></label>
-          <input type="range" min="10" max="2000" name="speed" value="<%= @speed %>" />
+          <input type="range" min="100" max="2000" name="speed" value="<%= @speed %>" />
           <label>Count Max: <%= @count %></label>
           <input type="range" min="4" max="800" name="count" value="<%= @count %>" />
         </form>
       </article>
       <style>
+        input { width: 50%; }
+
         <%= Plotex.Output.Svg.default_css() %>
         .plx-dataset-0 {
           stroke: blue;
@@ -67,7 +69,7 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
       |> assign(ydata2: [])
       |> assign(ydata3: [])
       |> assign(count: 200)
-      |> assign(speed: 1_000)
+      |> assign(speed: 300)
       |> update_plot()
 
     Process.send_after(self(), :tick, socket.assigns.speed)
@@ -109,7 +111,8 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
 
     dt = DateTime.utc_now()
     y1 = :math.sin( DateTime.to_unix(dt, :millisecond) / 3.0e3 )
-    y2 = :math.cos( DateTime.to_unix(dt, :millisecond) / 3.0e3 )
+    y2 = :math.cos( DateTime.to_unix(dt, :millisecond) / 3.0e3 ) +
+         0.2 * :math.cos( 7.2 * DateTime.to_unix(dt, :millisecond) / 3.0e3 )
     y3 = :math.cos( 0.45 + DateTime.to_unix(dt, :millisecond) / 3.0e3 )
 
     xdata = Enum.take([dt | xdata], socket.assigns.count)
