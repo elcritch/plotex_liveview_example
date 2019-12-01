@@ -38,7 +38,7 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
     Logger.warn("#{__MODULE__} mount self: #{inspect(self())} ")
     Logger.warn("#{__MODULE__} mount socket: #{inspect(socket)} ")
 
-    if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
+    if connected?(socket), do: :timer.send_interval(100, self(), :tick)
 
     edt = DateTime.utc_now()
     sdt = edt |> DateTime.add(-3600, :second)
@@ -75,19 +75,23 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
     ydata = socket.assigns.ydata
 
     dt = DateTime.utc_now()
-    y = :math.sin( DateTime.to_unix(dt, :second) / 10.0 )
+    y = :math.sin( DateTime.to_unix(dt, :millisecond) / 5.0e3 )
 
     xdata! = Enum.take([dt | xdata], 1000)
     ydata! = Enum.take([y | ydata], 1000)
 
     plt = Plotex.plot(
       [{xdata!, ydata!}],
-      xaxis: [units: %Axis.Units.Time{},
-              formatter: %Formatter.DateTime.Cldr{},
-              ticks: 4,
-              width: 140,
-              padding: 0.05,
-              view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
+      xaxis: [
+        units: %Axis.Units.Time{},
+        formatter: %Formatter.DateTime.Cldr{},
+        ticks: 4,
+        width: 140,
+        padding: 0.05,
+        view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
+      ],
+      yaxis: [
+        view_min: %ViewRange{start: -1.0, stop: 1.0},
       ]
     )
 
