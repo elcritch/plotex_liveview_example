@@ -33,7 +33,7 @@ defmodule PlotexLiveViewExample.MixProject do
   defp deps do
     [
       {:plotex, "~> 0.2.2"},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:phoenix_live_view, "~> 0.4.0"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix, "~> 1.4.11"},
       {:phoenix_pubsub, "~> 1.1"},
