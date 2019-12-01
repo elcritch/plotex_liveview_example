@@ -1,6 +1,5 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+  <h2>Welcome to <i><%= PlotexLiveViewExampleWeb |> inspect %></i> Example</h2>
 </section>
 
 <section class="row">
