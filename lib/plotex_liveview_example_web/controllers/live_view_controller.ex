@@ -1,5 +1,5 @@
 defmodule PlotexLiveViewExample.LivePageController do
-  use PlotexLiveViewExample, :controller
+  use PlotexLiveViewExampleWeb, :controller
   require Logger
 
   import Phoenix.LiveView.Controller

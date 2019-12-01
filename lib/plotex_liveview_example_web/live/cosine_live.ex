@@ -39,6 +39,9 @@ defmodule PlotexLiveViewExample.DataHistoryLive do
 
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
 
+    edt = NaiveDateTime.utc_now()
+    sdt = sdt |> NaiveDateTime.add(-3600, :second)
+
     socket! =
       socket
       |> put_date()
