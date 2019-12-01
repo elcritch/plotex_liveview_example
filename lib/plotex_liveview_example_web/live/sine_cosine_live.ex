@@ -30,9 +30,9 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
       <article>
         <form phx-change="update">
           <label>Tick MS: <%= @speed %></label>
-          <input type="range" min="10" max="2000" name="speed" value="<%= @speed %>" phx-debounce="100" />
+          <input type="range" min="10" max="2000" name="speed" value="<%= @speed %>" />
           <label>Count Max: <%= @count %></label>
-          <input type="range" min="4" max="800" name="count" value="<%= @count %>" phx-debounce="100" />
+          <input type="range" min="4" max="800" name="count" value="<%= @count %>" />
         </form>
       </article>
       <style>
@@ -57,7 +57,7 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
     edt = DateTime.utc_now()
     sdt = edt |> DateTime.add(-3600, :second)
 
-    socket! =
+    socket =
       socket
       |> put_date()
       |> assign(start: sdt)
@@ -65,49 +65,35 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
       |> assign(xdata: [])
       |> assign(ydata1: [])
       |> assign(ydata2: [])
+      |> assign(ydata3: [])
       |> assign(count: 200)
+      |> assign(speed: 1_000)
       |> update_plot()
-      |> put_timer(200)
 
-    {:ok, socket!}
+    Process.send_after(self(), :tick, socket.assigns.speed)
+
+    {:ok, socket}
   end
 
   def handle_event("update", event, socket) do
     Logger.info("cosine plot: speed: #{inspect event}")
     speed = event["speed"] |> String.to_integer()
     count = event["count"] |> String.to_integer()
-    {:noreply, socket |> put_timer(speed) |> assign(count: count) }
+    {:noreply, socket |> assign(speed: speed, count: count) }
   end
 
   def handle_info(:tick, socket) do
-    socket! =
+    socket =
       socket
       |> put_date()
       |> update_plot()
 
-    {:noreply, socket!}
-  end
+    Process.send_after(self(), :tick, socket.assigns.speed)
 
-  def put_timer(socket, speed \\ 1_000) do
-
-    case socket.assigns[:tref] do
-      nil ->
-        nil
-      tref ->
-        Logger.warn("#{__MODULE__} canceling timer #{inspect tref}")
-        :timer.cancel(tref)
-    end
-
-    {:ok, tref} =
-      if connected?(socket) do
-        :timer.send_interval(speed, self(), :tick)
-      else
-        {:ok, nil}
-      end
-
-    socket
-    |> assign(tref: tref)
-    |> assign(speed: speed)
+    # socket =
+      # socket
+      # |> update_plot()
+    {:noreply, socket}
   end
 
   defp put_date(socket) do
@@ -119,17 +105,20 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
     xdata = socket.assigns.xdata
     ydata1 = socket.assigns.ydata1
     ydata2 = socket.assigns.ydata2
+    ydata3 = socket.assigns.ydata3
 
     dt = DateTime.utc_now()
     y1 = :math.sin( DateTime.to_unix(dt, :millisecond) / 3.0e3 )
     y2 = :math.cos( DateTime.to_unix(dt, :millisecond) / 3.0e3 )
+    y3 = :math.cos( 0.45 + DateTime.to_unix(dt, :millisecond) / 3.0e3 )
 
-    xdata! = Enum.take([dt | xdata], socket.assigns.count)
-    ydata1! = Enum.take([y1 | ydata1], socket.assigns.count)
-    ydata2! = Enum.take([y2 | ydata2], socket.assigns.count)
+    xdata = Enum.take([dt | xdata], socket.assigns.count)
+    ydata1 = Enum.take([y1 | ydata1], socket.assigns.count)
+    ydata2 = Enum.take([y2 | ydata2], socket.assigns.count)
+    ydata3 = Enum.take([y3 | ydata3], socket.assigns.count)
 
     plt = Plotex.plot(
-      [{xdata!, ydata1!}, {xdata!, ydata2!}],
+      [{xdata, ydata1}, {xdata, ydata2}, {xdata, ydata3}],
       xaxis: [
         units: %Axis.Units.Time{ticks: 4},
         formatter: %Formatter.DateTime.Cldr{},
@@ -143,9 +132,10 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
     )
 
     assign(socket,
-      xdata: xdata!,
-      ydata1: ydata1!,
-      ydata2: ydata2!,
+      xdata: xdata,
+      ydata1: ydata1,
+      ydata2: ydata2,
+      ydata3: ydata3,
       plt: plt,
     )
   end
