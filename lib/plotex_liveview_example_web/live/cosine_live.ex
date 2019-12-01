@@ -72,12 +72,17 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
   end
 
   def handle_info(:tick, socket) do
-    socket! =
+    socket =
       socket
       |> put_date()
       |> update_plot()
 
-    {:noreply, socket!}
+    Process.sleep(socket.assigns.speed/3 |> round)
+    socket = socket |> update_plot()
+    Process.sleep(socket.assigns.speed/3 |> round)
+    socket = socket |> update_plot()
+
+    {:noreply, socket}
   end
 
   def put_timer(socket, speed \\ 1_000) do
