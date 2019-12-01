@@ -48,6 +48,9 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
         .plx-dataset-1 .plx-data-line {
           stroke: red;
         }
+        .plx-dataset-1 .plx-data-point {
+          display: none;
+        }
       </style>
     """
   end
