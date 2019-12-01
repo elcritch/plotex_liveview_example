@@ -9,3 +9,5 @@ Example Phoenix LiveServer with a few basic sin/cos graphs. To start the demo Ph
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 See Plotex library for Elixir at [Plotex](https://github.com/elcritch/plotex).
+
+![Example Multi Output](test/example-multi-graph.png "Example Multi Cosine Plot")
