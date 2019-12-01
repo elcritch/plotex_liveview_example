@@ -32,7 +32,7 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
           <label>Tick MS: <%= @speed %></label>
           <input type="range" min="10" max="2000" name="speed" value="<%= @speed %>" phx-debounce="100" />
           <label>Count Max: <%= @count %></label>
-          <input type="range" min="4" max="1000" name="count" value="<%= @count %>" phx-debounce="100" />
+          <input type="range" min="4" max="800" name="count" value="<%= @count %>" phx-debounce="100" />
         </form>
       </article>
       <style>
@@ -55,7 +55,7 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
       |> assign(stop: edt)
       |> assign(xdata: [])
       |> assign(ydata: [])
-      |> assign(count: 1_000)
+      |> assign(count: 200)
       |> update_plot()
       |> put_timer(1_000)
 
@@ -118,9 +118,8 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
     plt = Plotex.plot(
       [{xdata!, ydata!}],
       xaxis: [
-        units: %Axis.Units.Time{},
+        units: %Axis.Units.Time{ticks: 4},
         formatter: %Formatter.DateTime.Cldr{},
-        ticks: 4,
         width: 140,
         padding: 0.05,
         view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
