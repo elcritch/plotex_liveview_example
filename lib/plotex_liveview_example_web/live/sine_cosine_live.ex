@@ -9,7 +9,7 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
 
   def graph_for_data(plt) do
     svg_str =
-      Plotex.Output.Svg.generate(
+      Plotex.Output.LiveSvg.generate(
         plt,
         %Options{
           xaxis: %Options.Axis{label: %Options.Item{rotate: 35}},
@@ -68,8 +68,8 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
       |> assign(ydata1: [])
       |> assign(ydata2: [])
       |> assign(ydata3: [])
-      |> assign(count: 200)
-      |> assign(speed: 300)
+      |> assign(count: 300)
+      |> assign(speed: 200)
       |> update_plot()
 
     Process.send_after(self(), :tick, socket.assigns.speed)
@@ -123,7 +123,7 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
     plt = Plotex.plot(
       [{xdata, ydata1}, {xdata, ydata2}, {xdata, ydata3}],
       xaxis: [
-        units: %Axis.Units.Time{ticks: 4},
+        units: %Axis.Units.Time{ticks: 5},
         formatter: %Formatter.DateTime.Cldr{},
         width: 140,
         padding: 0.05,
