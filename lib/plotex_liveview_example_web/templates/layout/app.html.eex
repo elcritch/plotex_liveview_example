@@ -10,13 +10,15 @@
   <body>
     <header>
       <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://github.com/elcritch/plotex">Plotex GitHub</a></li>
-          </ul>
-            <li><a href="https://hex.pm/packages/plotex">Plotex Hex</a></li>
-          </ul>
-        </nav>
+          <article class="column">
+            <a href="/">Home</a>
+          </article>
+          <article class="column">
+            <a href="https://github.com/elcritch/plotex">Plotex GitHub</a>
+          </article>
+          <article class="column">
+            <a href="https://hex.pm/packages/plotex">Plotex Hex</a>
+          </article>
       </section>
     </header>
     <main role="main" class="container">
