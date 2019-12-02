@@ -125,11 +125,11 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
     plt = Plotex.plot(
       [{xdata!, ydata!}],
       xaxis: [
-        units: %Axis.Units.Time{ticks: 4},
+        units: %Axis.Units.Time{ticks: 4, min_basis: :second},
         formatter: %Formatter.DateTime.Cldr{},
         width: 140,
         padding: 0.05,
-        view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
+        # view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
       ],
       yaxis: [
         view_min: %ViewRange{start: -1.0, stop: 1.0},
