@@ -9,7 +9,7 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
 
   def graph_for_data(plt) do
     svg_str =
-      Plotex.Output.LiveSvg.generate(
+      Plotex.Output.Svg.generate(
         plt,
         %Options{
           xaxis: %Options.Axis{label: %Options.Item{rotate: 35}},
