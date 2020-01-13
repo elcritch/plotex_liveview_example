@@ -33,8 +33,8 @@ defmodule PlotexLiveViewExample.MixProject do
   defp deps do
     [
       # {:plotex, "~> 0.2.3", github: "elcritch/plotex"},
-      # {:plotex, "~> 0.2.3"},
-      {:plotex, "~> 0.2.3", path: "../plotex/"},
+      {:plotex, "~> 0.3.0"},
+      # {:plotex, "~> 0.2.3", path: "../plotex/"},
       {:phoenix_live_view, "~> 0.4.0"},
       {:floki, ">= 0.0.0", only: :test},
       {:ex_cldr_dates_times, "~> 2.2"},
