@@ -1,5 +1,6 @@
-defmodule PlotexLiveViewExample.CosineGraphLive do
-  use Phoenix.LiveView
+defmodule PlotexLiveviewExampleWeb.CosineGraphLive do
+  use PlotexLiveviewExampleWeb, :live_view
+
   require Logger
   alias Plotex.Axis
   alias Plotex.ViewRange

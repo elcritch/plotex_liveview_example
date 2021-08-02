@@ -1,4 +1,4 @@
-defmodule PlotexLiveViewExample.SineCosineGraphLive do
+defmodule PlotexLiveViewExampleWeb.SineCosineGraphLive do
   use Phoenix.LiveView
   require Logger
   alias Plotex.Axis

@@ -18,6 +18,7 @@ defmodule PlotexLiveviewExampleWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+    live "/cosine", CosineGraphLive
   end
 
   # Other scopes may use custom stacks.
