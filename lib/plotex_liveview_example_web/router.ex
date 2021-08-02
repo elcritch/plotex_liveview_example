@@ -18,8 +18,10 @@ defmodule PlotexLiveViewExampleWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/cosine_graphs.html", LivePageController, :index_cose
-    get "/sine_cosine_graphs.html", LivePageController, :index_sine_cose
+    # get "/cosine_graphs.html", LivePageController, :index_cose
+    # get "/sine_cosine_graphs.html", LivePageController, :index_sine_cose
+    live "/cosine_graphs.html", CosineGraphLive
+    live "/sine_cosine_graphs.html", SineCosineGraphLive
   end
 
   # Other scopes may use custom stacks.

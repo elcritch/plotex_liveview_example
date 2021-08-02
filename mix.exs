@@ -33,18 +33,22 @@ defmodule PlotexLiveViewExample.MixProject do
   defp deps do
     [
       # {:plotex, "~> 0.2.3", github: "elcritch/plotex"},
-      {:plotex, "~> 0.3.0"},
+      {:plotex, "~> 0.3.1"},
       # {:plotex, "~> 0.2.3", path: "../plotex/"},
-      {:phoenix_live_view, "~> 0.4.0"},
-      {:floki, ">= 0.0.0", only: :test},
-      {:ex_cldr_dates_times, "~> 2.2"},
-      {:phoenix, "~> 1.4.11"},
-      {:phoenix_pubsub, "~> 1.1"},
+
+      {:phoenix, "~> 1.5.8"},
+      {:phoenix_live_view, "~> 0.15.1", override: true},
+      {:floki, ">= 0.27.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.4"},
+      {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:exsync, "~> 0.2", only: :dev},
       {:plug_cowboy, "~> 2.0"}
+
     ]
   end
 end
