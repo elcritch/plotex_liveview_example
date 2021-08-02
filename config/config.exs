@@ -1,15 +1,19 @@
+# This file is responsible for configuring your application
+# and its dependencies with the aid of the Mix.Config module.
+#
+# This configuration file is loaded before any dependency and
+# is restricted to this project.
+
+# General application configuration
 use Mix.Config
 
-config :plotex_liveview_example,
-  namespace: PlotexLiveViewExample
-
 # Configures the endpoint
-config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint,
+config :plotex_liveview_example, PlotexLiveviewExampleWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "AnXeKAdtZB191+4H6dvj52qoU0FjTYagBqSurS7EEQbNblv3qN/6MFAL4FfhJcoY",
-  render_errors: [view: PlotexLiveViewExampleWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PlotexLiveViewExample.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [ signing_salt: "eP2I3HKiZyuo07+cdm0TKh8IysjXBjXR" ]
+  secret_key_base: "WU/3Jm9/tftQt+2PWaMQbewm/2w6KCfgZqihv1Z1wbR+IvprIomLGmuOCSfGnTab",
+  render_errors: [view: PlotexLiveviewExampleWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: PlotexLiveviewExample.PubSub,
+  live_view: [signing_salt: "Mr66491z"]
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -11,8 +11,11 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
+config :plotex_liveview_example, PlotexLiveviewExampleWeb.Endpoint,
+  http: [
+    port: String.to_integer(System.get_env("PORT") || "4000"),
+    transport_options: [socket_opts: [:inet6]]
+  ],
   secret_key_base: secret_key_base
 
 # ## Using releases (Elixir v1.9+)
@@ -20,7 +23,7 @@ config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint, server: true
+#     config :plotex_liveview_example, PlotexLiveviewExampleWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.

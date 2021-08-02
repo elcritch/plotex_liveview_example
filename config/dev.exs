@@ -6,8 +6,8 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint,
-  http: [port: 4040],
+config :plotex_liveview_example, PlotexLiveviewExampleWeb.Endpoint,
+  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -46,12 +46,12 @@ config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :plotex_liveview_example, PlotexLiveViewExampleWeb.Endpoint,
+config :plotex_liveview_example, PlotexLiveviewExampleWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/plotex_liveview_example_web/{live,views}/.*(ex)$",
+      ~r"lib/plotex_liveview_example_web/(live|views)/.*(ex)$",
       ~r"lib/plotex_liveview_example_web/templates/.*(eex)$"
     ]
   ]

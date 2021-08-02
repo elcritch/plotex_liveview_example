@@ -1,11 +1,11 @@
-defmodule PlotexLiveViewExampleWeb.Gettext do
+defmodule PlotexLiveviewExampleWeb.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import PlotexLiveViewExampleWeb.Gettext
+      import PlotexLiveviewExampleWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")

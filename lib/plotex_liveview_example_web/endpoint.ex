@@ -1,4 +1,4 @@
-defmodule PlotexLiveViewExampleWeb.Endpoint do
+defmodule PlotexLiveviewExampleWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :plotex_liveview_example
 
   # The session will be stored in the cookie and signed,
@@ -6,11 +6,11 @@ defmodule PlotexLiveViewExampleWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_surface_bulma_widgets_playground_key",
-    signing_salt: "6tVGJPWv"
+    key: "_plotex_liveview_example_key",
+    signing_salt: "fEogj0XO"
   ]
 
-  socket "/socket", PlotexLiveViewExampleWeb.UserSocket,
+  socket "/socket", PlotexLiveviewExampleWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -22,7 +22,7 @@ defmodule PlotexLiveViewExampleWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :surface_bulma_widgets_playground,
+    from: :plotex_liveview_example,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -33,10 +33,6 @@ defmodule PlotexLiveViewExampleWeb.Endpoint do
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
-
-  plug Phoenix.LiveDashboard.RequestLogger,
-    param_key: "request_logger",
-    cookie_key: "request_logger"
 
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
@@ -49,5 +45,5 @@ defmodule PlotexLiveViewExampleWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug PlotexLiveViewExample.Router
+  plug PlotexLiveviewExampleWeb.Router
 end

@@ -1,4 +1,4 @@
-defmodule PlotexLiveViewExampleWeb.ConnCase do
+defmodule PlotexLiveviewExampleWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,8 +11,8 @@ defmodule PlotexLiveViewExampleWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use PlotexLiveViewExampleWeb.ConnCase, async: true`, although
-  this option is not recommendded for other databases.
+  by setting `use PlotexLiveviewExampleWeb.ConnCase, async: true`, although
+  this option is not recommended for other databases.
   """
 
   use ExUnit.CaseTemplate
@@ -20,11 +20,14 @@ defmodule PlotexLiveViewExampleWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
-      alias PlotexLiveViewExampleWeb.Router.Helpers, as: Routes
+      import Plug.Conn
+      import Phoenix.ConnTest
+      import PlotexLiveviewExampleWeb.ConnCase
+
+      alias PlotexLiveviewExampleWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint PlotexLiveViewExampleWeb.Endpoint
+      @endpoint PlotexLiveviewExampleWeb.Endpoint
     end
   end
 

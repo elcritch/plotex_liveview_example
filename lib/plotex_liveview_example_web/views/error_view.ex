@@ -1,5 +1,5 @@
-defmodule PlotexLiveViewExampleWeb.ErrorView do
-  use PlotexLiveViewExampleWeb, :view
+defmodule PlotexLiveviewExampleWeb.ErrorView do
+  use PlotexLiveviewExampleWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

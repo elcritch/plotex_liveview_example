@@ -1,6 +1,6 @@
-defmodule PlotexLiveViewExample do
+defmodule PlotexLiveviewExample do
   @moduledoc """
-  PlotexLiveViewExample keeps the contexts that define your domain
+  PlotexLiveviewExample keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

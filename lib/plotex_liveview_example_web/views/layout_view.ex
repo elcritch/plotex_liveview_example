@@ -1,3 +1,3 @@
-defmodule PlotexLiveViewExampleWeb.LayoutView do
-  use PlotexLiveViewExampleWeb, :view
+defmodule PlotexLiveviewExampleWeb.LayoutView do
+  use PlotexLiveviewExampleWeb, :view
 end

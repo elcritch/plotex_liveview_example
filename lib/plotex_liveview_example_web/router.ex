@@ -1,11 +1,11 @@
-defmodule PlotexLiveViewExampleWeb.Router do
-  use PlotexLiveViewExampleWeb, :router
+defmodule PlotexLiveviewExampleWeb.Router do
+  use PlotexLiveviewExampleWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
-    plug Phoenix.LiveView.Flash
+    plug :fetch_live_flash
+    plug :put_root_layout, {PlotexLiveviewExampleWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,18 +14,14 @@ defmodule PlotexLiveViewExampleWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PlotexLiveViewExampleWeb do
+  scope "/", PlotexLiveviewExampleWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    # get "/cosine_graphs.html", LivePageController, :index_cose
-    # get "/sine_cosine_graphs.html", LivePageController, :index_sine_cose
-    live "/cosine_graphs.html", CosineGraphLive
-    live "/sine_cosine_graphs.html", SineCosineGraphLive
+    live "/", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PlotexLiveViewExampleWeb do
+  # scope "/api", PlotexLiveviewExampleWeb do
   #   pipe_through :api
   # end
 end
