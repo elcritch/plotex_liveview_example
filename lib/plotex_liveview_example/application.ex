@@ -27,7 +27,3 @@ defmodule PlotexLiveViewExample.Application do
     :ok
   end
 end
-
-defmodule PlotexLiveViewExample.Cldr do
-  use Cldr, locales: ["en"], providers: [Cldr.Number, Cldr.Calendar, Cldr.DateTime]
-end

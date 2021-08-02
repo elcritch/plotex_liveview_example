@@ -126,7 +126,7 @@ defmodule PlotexLiveViewExample.CosineGraphLive do
       [{xdata!, ydata!}],
       xaxis: [
         units: %Axis.Units.Time{ticks: 4, min_basis: :second},
-        formatter: %Formatter.DateTime.Cldr{},
+        formatter: %Formatter.Calendar{},
         width: 140,
         padding: 0.05,
         # view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},

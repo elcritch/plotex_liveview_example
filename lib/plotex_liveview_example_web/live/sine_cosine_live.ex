@@ -127,7 +127,7 @@ defmodule PlotexLiveViewExample.SineCosineGraphLive do
       [{xdata, ydata1}, {xdata, ydata2}, {xdata, ydata3}],
       xaxis: [
         units: %Axis.Units.Time{ticks: 5},
-        formatter: %Formatter.DateTime.Cldr{},
+        formatter: %Formatter.Calendar{},
         width: 140,
         padding: 0.05,
         view_min: %ViewRange{stop: dt, start: dt |> DateTime.add(-10, :second)},
