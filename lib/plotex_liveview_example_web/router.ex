@@ -19,6 +19,7 @@ defmodule PlotexLiveviewExampleWeb.Router do
 
     live "/", PageLive, :index
     live "/cosine", CosineGraphLive
+    live "/sine_and_cosine", SineCosineGraphLive
   end
 
   # Other scopes may use custom stacks.

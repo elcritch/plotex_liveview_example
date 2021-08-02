@@ -1,4 +1,4 @@
-defmodule PlotexLiveViewExampleWeb.SineCosineGraphLive do
+defmodule PlotexLiveviewExampleWeb.SineCosineGraphLive do
   use PlotexLiveviewExampleWeb, :live_view
 
   require Logger
@@ -31,7 +31,7 @@ defmodule PlotexLiveViewExampleWeb.SineCosineGraphLive do
       <article>
         <form phx-change="update" >
           <label>Tick MS: <%= @speed %></label>
-          <input type="range" min="100" max="2000" name="speed" value="<%= @speed %>" />
+          <input type="range" min="15" max="2000" name="speed" value="<%= @speed %>" />
           <label>Count Max: <%= @count %></label>
           <input type="range" min="4" max="800" name="count" value="<%= @count %>" />
         </form>
