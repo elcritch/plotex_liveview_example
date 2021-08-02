@@ -33,7 +33,7 @@ defmodule PlotexLiveviewExample.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 0.4", github: "elcritch/plotex"},
+      {:plotex, "~> 0.4", github: "elcritch/plotex"},
       {:calendar, "~> 1.0"},
 
       {:phoenix, "~> 1.5.9"},
