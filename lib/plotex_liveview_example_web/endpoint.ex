@@ -1,18 +1,28 @@
 defmodule PlotexLiveViewExampleWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :plotex_liveview_example
 
+  # The session will be stored in the cookie and signed,
+  # this means its contents can be read but not tampered with.
+  # Set :encryption_salt if you would also like to encrypt it.
+  @session_options [
+    store: :cookie,
+    key: "_surface_bulma_widgets_playground_key",
+    signing_salt: "6tVGJPWv"
+  ]
+
   socket "/socket", PlotexLiveViewExampleWeb.UserSocket,
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :plotex_liveview_example,
+    from: :surface_bulma_widgets_playground,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -24,6 +34,10 @@ defmodule PlotexLiveViewExampleWeb.Endpoint do
     plug Phoenix.CodeReloader
   end
 
+  plug Phoenix.LiveDashboard.RequestLogger,
+    param_key: "request_logger",
+    cookie_key: "request_logger"
+
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
@@ -34,14 +48,6 @@ defmodule PlotexLiveViewExampleWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
-
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_plotex_liveview_example_key",
-    signing_salt: "NW5vZs6o"
-
-  plug PlotexLiveViewExampleWeb.Router
+  plug Plug.Session, @session_options
+  plug PlotexLiveViewExample.Router
 end
