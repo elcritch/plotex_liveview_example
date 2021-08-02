@@ -1,5 +1,6 @@
 defmodule PlotexLiveViewExampleWeb.SineCosineGraphLive do
-  use Phoenix.LiveView
+  use PlotexLiveviewExampleWeb, :live_view
+
   require Logger
   alias Plotex.Axis
   alias Plotex.ViewRange
@@ -55,7 +56,7 @@ defmodule PlotexLiveViewExampleWeb.SineCosineGraphLive do
     """
   end
 
-  def mount(_session, socket) do
+  def mount(_params, _session, socket) do
     Logger.warn("#{__MODULE__} mount self: #{inspect(self())} ")
     Logger.warn("#{__MODULE__} mount socket: #{inspect(socket)} ")
 

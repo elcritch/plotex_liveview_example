@@ -44,7 +44,7 @@ defmodule PlotexLiveviewExampleWeb.CosineGraphLive do
     """
   end
 
-  def mount(_session, socket) do
+  def mount(_params, _session, socket) do
     Logger.warn("#{__MODULE__} mount self: #{inspect(self())} ")
     Logger.warn("#{__MODULE__} mount socket: #{inspect(socket)} ")
 
